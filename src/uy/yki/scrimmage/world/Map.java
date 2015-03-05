@@ -12,9 +12,24 @@ public class Map  {
     int maxPlayers;
     List<Zone> zonesList;
 
-    public Map(String name) {
+    /**
+     * CONSTRUCTORS
+     */
+    public Map(String name, int maxPlayers) {
         this.name = name;
+        this.maxPlayers = maxPlayers;
     }
+
+    /**
+     * METHODS
+     */
+    public void addZone(Zone newZone) {
+        zonesList.add(newZone);
+    }
+
+    /**
+     * GETTERS AND SETTERS
+     */
 
     public String getName() {
         return name;

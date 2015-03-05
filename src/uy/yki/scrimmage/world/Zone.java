@@ -23,23 +23,40 @@ public class Zone {
     Integer influence;
 
     boolean isLand;
-    boolean isWater;
+    boolean isSea;
 
     List<Zone> adjacentZones;
 
-    public Zone(String name, Stronghold stronghold, Port port, Integer supplies, Integer influence, boolean isLand) {
+    public Zone(String name, Stronghold stronghold, Port port, Integer supplies, Integer influence, boolean isSea) {
         this.name = name;
         this.stronghold = stronghold;
         this.port = port;
         this.supplies = supplies;
         this.influence = influence;
-        this.isLand = isLand;
-        this.isWater = !isLand;
+        this.isLand = !isSea;
+        this.isSea = isSea;
         this.adjacentZones = new ArrayList<Zone>();
     }
 
+    public Zone(String name, Stronghold stronghold, Port port, Integer supplies, Integer influence) {
+        this.name = name;
+        this.stronghold = stronghold;
+        this.port = port;
+        this.supplies = supplies;
+        this.influence = influence;
+        this.isLand = true;
+        this.isSea = false;
+        this.adjacentZones = new ArrayList<Zone>();
+    }
+
+    /**
+     * Sets a bidirectional link between zones.
+     *
+     * @param zone
+     */
     public void addAdjacentZone(Zone zone) {
         this.adjacentZones.add(zone);
+        zone.addAdjacentZone(this);
     }
 
 
@@ -95,12 +112,12 @@ public class Zone {
         this.isLand = isLand;
     }
 
-    public boolean isWater() {
-        return isWater;
+    public boolean isSea() {
+        return isSea;
     }
 
-    public void setWater(boolean isWater) {
-        this.isWater = isWater;
+    public void setSea(boolean isWater) {
+        this.isSea = isWater;
     }
 
     public List<Zone> getAdjacentZones() {
