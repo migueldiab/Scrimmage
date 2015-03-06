@@ -1,5 +1,8 @@
-package uy.yki.scrimmage.world;
+package uy.yki.scrimmage.scrimmage.world;
 
+import uy.yki.scrimmage.scrimmage.ScrimmageStart.ZoneNames;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,6 +21,7 @@ public class Map  {
     public Map(String name, int maxPlayers) {
         this.name = name;
         this.maxPlayers = maxPlayers;
+        zonesList = new ArrayList<Zone>();
     }
 
     /**
@@ -53,5 +57,16 @@ public class Map  {
 
     public void setZonesList(List<Zone> zonesList) {
         this.zonesList = zonesList;
+    }
+
+    public Zone getZoneByName(ZoneNames zoneName) {
+        synchronized (zonesList) {
+            for (Zone zone : zonesList) {
+                if (zoneName.toString().equals(zone.getName())) {
+                    return zone;
+                }
+            }
+        }
+        return null;
     }
 }

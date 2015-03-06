@@ -1,13 +1,14 @@
-package uy.yki.scrimmage.game;
+package uy.yki.scrimmage.scrimmage.game;
 
-import uy.yki.scrimmage.player.Faction;
-import uy.yki.scrimmage.player.Player;
-import uy.yki.scrimmage.world.Map;
+import uy.yki.scrimmage.scrimmage.player.Faction;
+import uy.yki.scrimmage.scrimmage.player.Player;
+import uy.yki.scrimmage.scrimmage.world.Map;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map.Entry;
+import java.util.logging.Logger;
 
 /**
  * User: migueldiab@gmail.com
@@ -15,8 +16,11 @@ import java.util.Map.Entry;
  */
 
 public class Game {
+    private Logger log = Logger.getLogger(this.getClass().toString());
+
     List<Player> players;
     Map map;
+    int round;
 
     /**
      * CONSTRUCTORS
@@ -52,6 +56,7 @@ public class Game {
 
     public void loadMap(Map newMap) {
         this.map = newMap;
+        log.fine("Loading map " + map.getName() + " for " + map.getMaxPlayers() + " max players.");
         players = new ArrayList<Player>(newMap.getMaxPlayers());
 
     }
@@ -75,6 +80,6 @@ public class Game {
     }
 
     public boolean gameOver() {
-        return false;
+        return round > 10;
     }
 }

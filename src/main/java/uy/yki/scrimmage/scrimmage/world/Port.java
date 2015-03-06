@@ -1,4 +1,6 @@
-package uy.yki.scrimmage.world;
+package uy.yki.scrimmage.scrimmage.world;
+
+import uy.yki.scrimmage.scrimmage.ScrimmageStart.ZoneNames;
 
 /**
  * User: migueldiab@gmail.com
@@ -8,6 +10,9 @@ package uy.yki.scrimmage.world;
 public class Port {
     String name;
 
+    public Port(ZoneNames zoneNames) {
+        this(zoneNames.toString());
+    }
     public Port(String name) {
         this.name = name;
     }

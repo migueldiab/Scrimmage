@@ -1,4 +1,6 @@
-package uy.yki.scrimmage.world;
+package uy.yki.scrimmage.scrimmage.world;
+
+import uy.yki.scrimmage.scrimmage.ScrimmageStart.ZoneNames;
 
 /**
  * User: migueldiab@gmail.com
@@ -9,6 +11,9 @@ public class Stronghold {
     String name;
     Integer defense;
 
+    public Stronghold(ZoneNames zoneNames, Integer defense) {
+        this(zoneNames.toString(), defense);
+    }
     public Stronghold(String name, Integer defense) {
         this.name = name;
         this.defense = defense;

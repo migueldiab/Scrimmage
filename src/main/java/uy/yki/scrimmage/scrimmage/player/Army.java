@@ -1,6 +1,6 @@
-package uy.yki.scrimmage.player;
+package uy.yki.scrimmage.scrimmage.player;
 
-import uy.yki.scrimmage.troops.type.BaseTroop;
+import uy.yki.scrimmage.scrimmage.troops.type.BaseTroop;
 
 import java.util.List;
 
@@ -17,6 +17,11 @@ public class Army {
      * CONSTRUCTOR
      */
     public Army(List<BaseTroop> troops) {
+        this.troops = troops;
+    }
+
+    public Army(Integer supply, List<BaseTroop> troops) {
+        this.supply = supply;
         this.troops = troops;
     }
 

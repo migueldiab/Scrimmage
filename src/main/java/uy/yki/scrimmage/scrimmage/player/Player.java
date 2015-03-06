@@ -1,4 +1,4 @@
-package uy.yki.scrimmage.player;
+package uy.yki.scrimmage.scrimmage.player;
 
 /**
  * User: migueldiab@gmail.com

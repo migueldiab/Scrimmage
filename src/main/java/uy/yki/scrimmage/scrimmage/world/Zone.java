@@ -1,4 +1,6 @@
-package uy.yki.scrimmage.world;
+package uy.yki.scrimmage.scrimmage.world;
+
+import uy.yki.scrimmage.scrimmage.ScrimmageStart.ZoneNames;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,18 @@ public class Zone {
 
     List<Zone> adjacentZones;
 
+    /**
+     * CONSTRUCTORS
+     */
+    public Zone(ZoneNames zName, Stronghold stronghold, Port port, Integer supplies, Integer influence, boolean isSea) {
+        this(zName.toString(), stronghold, port, supplies, influence, isSea);
+
+    }
+    public Zone(ZoneNames zName, Stronghold stronghold, Port port, Integer supplies, Integer influence) {
+        this(zName.toString(), stronghold, port, supplies, influence);
+
+    }
+
     public Zone(String name, Stronghold stronghold, Port port, Integer supplies, Integer influence, boolean isSea) {
         this.name = name;
         this.stronghold = stronghold;
@@ -50,15 +64,42 @@ public class Zone {
     }
 
     /**
+     * METHODS
+     */
+
+    /**
      * Sets a bidirectional link between zones.
      *
      * @param zone
      */
     public void addAdjacentZone(Zone zone) {
-        this.adjacentZones.add(zone);
-        zone.addAdjacentZone(this);
+        if (!this.adjacentZones.contains(zone)) {
+            this.adjacentZones.add(zone);
+            zone.addAdjacentZone(this);
+        }
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Zone)) return false;
+
+        Zone zone = (Zone) o;
+
+        if (name != null ? !name.equals(zone.name) : zone.name != null) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return name != null ? name.hashCode() : 0;
+    }
 
     /**
      * GETTERS AND SETTERS
@@ -127,4 +168,6 @@ public class Zone {
     public void setAdjacentZones(List<Zone> adjacentZones) {
         this.adjacentZones = adjacentZones;
     }
+
+
 }

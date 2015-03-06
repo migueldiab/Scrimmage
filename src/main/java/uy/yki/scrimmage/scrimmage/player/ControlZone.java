@@ -1,6 +1,6 @@
-package uy.yki.scrimmage.player;
+package uy.yki.scrimmage.scrimmage.player;
 
-import uy.yki.scrimmage.world.Zone;
+import uy.yki.scrimmage.scrimmage.world.Zone;
 
 /**
  * User: migueldiab@gmail.com
