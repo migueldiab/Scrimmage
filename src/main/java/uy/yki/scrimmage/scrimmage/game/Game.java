@@ -82,4 +82,8 @@ public class Game {
     public boolean gameOver() {
         return round > 10;
     }
+
+    public void nextRound() {
+        round++;
+    }
 }

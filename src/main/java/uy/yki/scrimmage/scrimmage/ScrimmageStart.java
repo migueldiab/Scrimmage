@@ -1,5 +1,6 @@
 package uy.yki.scrimmage.scrimmage;
 
+import com.ebay.sdk.helper.ConsoleUtil;
 import uy.yki.scrimmage.scrimmage.game.Game;
 import uy.yki.scrimmage.scrimmage.player.Army;
 import uy.yki.scrimmage.scrimmage.player.Faction;
@@ -11,9 +12,7 @@ import uy.yki.scrimmage.scrimmage.world.Port;
 import uy.yki.scrimmage.scrimmage.world.Stronghold;
 import uy.yki.scrimmage.scrimmage.world.Zone;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -74,16 +73,20 @@ public class ScrimmageStart {
 
     public static void main(String [] args) {
         ScrimmageStart start = ScrimmageStart.getInstance();
-        start.startGame();
+
+        try {
+            start.startGame();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    private void startGame() {
+    private void startGame() throws IOException {
         theGame = new Game();
         theGame.loadMap(createStubMap());
         maxPlayers = theGame.getMaxPlayers();
 
-        log.info("Number of Players (2-"+maxPlayers+"): ");
-        int numPlayers = readPlayers();
+        int numPlayers = ConsoleUtil.readInt("Number of Players (2-"+maxPlayers+"): ");
         if (1 < numPlayers && numPlayers <= maxPlayers) {
             log.info("Playing with " + numPlayers + " players");
             Set<Player> players = readPlayerNames(numPlayers);
@@ -92,43 +95,20 @@ public class ScrimmageStart {
                 for (Player player : theGame.getPlayers()) {
 
                 }
+                theGame.nextRound();
             }
         }
 
     }
 
-    private Set<Player> readPlayerNames(int numPlayer) {
-
+    private Set<Player> readPlayerNames(int numPlayer) throws IOException {
         Set<Player> players = new HashSet<Player>(numPlayer);
-        int i = 1;
         while (players.size() < numPlayer) {
-            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-            log.info("Player " + i++ + " name : ");
-            try{
-                String name = br.readLine();
-                Player aPlayer = new Player(name);
-                players.add(aPlayer);
-            }catch(NumberFormatException nfe){
-                System.err.println("Invalid Format!");
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            String name = ConsoleUtil.readString("Player " + (players.size()+1) + " name : ");
+            Player aPlayer = new Player(name);
+            players.add(aPlayer);
         }
         return players;
-    }
-
-    private int readPlayers() {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int numPlayers = -1;
-        try{
-            String s = br.readLine();
-            numPlayers = Integer.parseInt(s);
-        }catch(NumberFormatException nfe){
-            System.err.println("Invalid Format!");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return numPlayers;
     }
 
     private HashMap<Player, Faction> createStubFactions(Set<Player> players, Map map) {

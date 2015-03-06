@@ -52,4 +52,12 @@ public class Army {
     public void addTroop(BaseTroop aTroop) {
         troops.add(aTroop);
     }
+
+    @Override
+    public String toString() {
+        return "Army{" +
+              "supply=" + supply +
+              ", troops=" + troops +
+              '}';
+    }
 }

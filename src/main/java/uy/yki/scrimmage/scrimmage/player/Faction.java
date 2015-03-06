@@ -4,6 +4,7 @@ import uy.yki.scrimmage.scrimmage.world.Port;
 import uy.yki.scrimmage.scrimmage.world.Stronghold;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * User: migueldiab@gmail.com
@@ -11,6 +12,8 @@ import java.util.List;
  */
 
 public class Faction {
+    private Logger log = Logger.getLogger(this.getClass().toString());
+
     private Army army;
     private List<Stronghold> strongholds;
     private List<ControlZone> controlZones;
@@ -21,6 +24,7 @@ public class Faction {
      */
     public Faction(Army army) {
         this.army = army;
+        log.info("New faction controlling " + army);
 
     }
 

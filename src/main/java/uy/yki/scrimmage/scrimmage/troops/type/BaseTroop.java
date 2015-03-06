@@ -2,12 +2,16 @@ package uy.yki.scrimmage.scrimmage.troops.type;
 
 import uy.yki.scrimmage.scrimmage.world.Zone;
 
+import java.util.logging.Logger;
+
 /**
  * User: migueldiab@gmail.com
  * Date: 05/03/2015
  */
 
 public class BaseTroop {
+    private Logger log = Logger.getLogger(this.getClass().toString());
+
     private int POWER;
     private Zone zone;
     private boolean routed = false;
@@ -20,6 +24,7 @@ public class BaseTroop {
      */
     public BaseTroop(Zone zone) {
         this.zone = zone;
+        log.info("Troop type " + this.getClass().getSimpleName() + " created in " + zone);
     }
 
     /**
@@ -71,5 +76,17 @@ public class BaseTroop {
 
     public void setLandUnit(boolean landUnit) {
         this.landUnit = landUnit;
+    }
+
+    @Override
+    public String toString() {
+        return this.getClass().getSimpleName()+"{" +
+              "POWER=" + POWER +
+              ", zone=" + zone +
+              ", routed=" + routed +
+              ", canBeRouted=" + canBeRouted +
+              ", dead=" + dead +
+              ", landUnit=" + landUnit +
+              '}';
     }
 }
